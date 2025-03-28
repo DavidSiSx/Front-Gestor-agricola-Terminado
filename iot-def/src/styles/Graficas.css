@@ -1,0 +1,125 @@
+.graficas-page {
+  padding-bottom: 2rem;
+}
+
+.graficas-page h1 {
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.filtro-parcela {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.filtro-parcela label {
+  font-size: 0.9rem;
+}
+
+.filtro-parcela select {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  background-color: white;
+}
+
+.filtro-fecha {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filtro-fecha label {
+  font-size: 0.9rem;
+}
+
+.filtro-fecha input {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+}
+
+.graficas-container {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.grafica {
+  background-color: white;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  border-left: 3px solid var(--secondary-color);
+}
+
+.grafica h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.chart-container {
+  height: 300px;
+}
+
+.parcela-link {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.button:hover {
+  background-color: var(--primary-dark);
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .graficas-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .filtros {
+    flex-direction: column;
+  }
+
+  .filtro-fecha {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filtro-fecha input {
+    width: 100%;
+  }
+}
+
