@@ -4,7 +4,7 @@
   align-items: center;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
-  background-image: url("../../public/tractor-campo-agricola.jpg");
+  background-image: url("../tractor-campo-agricola.jpg");
   background-size: cover;
   background-position: center;
   background-blend-mode: overlay;
@@ -32,7 +32,6 @@
   max-width: 400px;
   position: relative;
   z-index: 10;
-  border-left: 4px solid var(--secondary-color);
 }
 
 .auth-card h1 {
@@ -73,6 +72,39 @@
   outline: none;
   border-color: var(--primary-color);
   box-shadow: 0 0 0 2px rgba(45, 62, 52, 0.2);
+}
+
+.password-requirements {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.password-requirements p {
+  margin-bottom: 0.25rem;
+}
+
+.password-requirements ul {
+  list-style-type: none;
+  padding-left: 0.5rem;
+}
+
+.password-requirements li {
+  margin-bottom: 0.15rem;
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.password-requirements li:before {
+  content: "○";
+  position: absolute;
+  left: 0;
+  color: var(--text-light);
+}
+
+.password-requirements li.requirement-met:before {
+  content: "●";
+  color: var(--success-color);
 }
 
 .auth-button {

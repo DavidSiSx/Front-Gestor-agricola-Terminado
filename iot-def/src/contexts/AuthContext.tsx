@@ -51,18 +51,48 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       })
 
       return
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error al registrar:", error)
-      throw error
+
+      // Mejorar los mensajes de error
+      let errorMessage = "Error al registrar usuario"
+      if (error.code === "auth/email-already-in-use") {
+        errorMessage = "Este correo electrónico ya está en uso"
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage = "El formato del correo electrónico es inválido"
+      } else if (error.code === "auth/weak-password") {
+        errorMessage = "La contraseña es demasiado débil"
+      } else if (error.code === "auth/network-request-failed") {
+        errorMessage = "Error de conexión. Verifica tu conexión a internet"
+      }
+
+      throw new Error(errorMessage)
     }
   }
 
   async function login(email: string, password: string) {
     try {
       await signInWithEmailAndPassword(auth, email, password)
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error al iniciar sesión:", error)
-      throw error
+
+      // Mejorar los mensajes de error
+      let errorMessage = "Error al iniciar sesión"
+      if (error.code === "auth/user-not-found") {
+        errorMessage = "No existe una cuenta con este correo electrónico"
+      } else if (error.code === "auth/wrong-password" || error.code === "auth/invalid-credential") {
+        errorMessage = "Correo electrónico o contraseña incorrectos"
+      } else if (error.code === "auth/invalid-email") {
+        errorMessage = "El formato del correo electrónico es inválido"
+      } else if (error.code === "auth/user-disabled") {
+        errorMessage = "Esta cuenta ha sido deshabilitada"
+      } else if (error.code === "auth/too-many-requests") {
+        errorMessage = "Demasiados intentos fallidos. Intenta más tarde"
+      } else if (error.code === "auth/network-request-failed") {
+        errorMessage = "Error de conexión. Verifica tu conexión a internet"
+      }
+
+      throw new Error(errorMessage)
     }
   }
 

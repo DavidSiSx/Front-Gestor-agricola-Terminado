@@ -42,10 +42,21 @@
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
+  flex: 2;
 }
 
-.filtro-fecha label {
+.filtro-intervalo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.filtro-fecha label,
+.filtro-intervalo label {
   font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .filtro-fecha input {
@@ -55,10 +66,23 @@
   font-size: 0.9rem;
 }
 
+.filtro-intervalo select {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  background-color: white;
+}
+
 .graficas-container {
   display: grid;
   gap: 1.5rem;
   margin-bottom: 2rem;
+}
+
+.single-chart {
+  grid-template-columns: 1fr !important;
 }
 
 .grafica {
@@ -66,7 +90,6 @@
   border-radius: var(--border-radius);
   padding: 1.5rem;
   box-shadow: var(--shadow);
-  border-left: 3px solid var(--secondary-color);
 }
 
 .grafica h2 {
@@ -76,7 +99,14 @@
 }
 
 .chart-container {
-  height: 300px;
+  height: 400px;
+  position: relative;
+}
+
+.doughnut-container {
+  max-height: 500px;
+  margin: 0 auto;
+  max-width: 500px;
 }
 
 .historial-completo {
@@ -135,13 +165,19 @@
     flex-direction: column;
   }
 
-  .filtro-fecha {
+  .filtro-fecha,
+  .filtro-intervalo {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .filtro-fecha input {
+  .filtro-fecha input,
+  .filtro-intervalo select {
     width: 100%;
+  }
+
+  .chart-container {
+    height: 300px;
   }
 
   .historial-table th,

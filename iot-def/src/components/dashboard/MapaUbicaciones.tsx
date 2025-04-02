@@ -26,7 +26,7 @@ function MapaUbicaciones({ parcelas }: MapaUbicacionesProps) {
     const newMap = new mapboxgl.Map({
       container: "mapa-ubicaciones",
       style: "mapbox://styles/mapbox/streets-v11",
-      center: [parcelas[0].longitud, parcelas[0].latitud],
+      center: [Number.parseFloat(parcelas[0].longitud), Number.parseFloat(parcelas[0].latitud)],
       zoom: 13,
     })
 
@@ -36,20 +36,24 @@ function MapaUbicaciones({ parcelas }: MapaUbicacionesProps) {
     // Agregar marcadores cuando el mapa se cargue
     newMap.on("load", () => {
       parcelas.forEach((parcela) => {
+        if (parcela.is_deleted === 1) return // No mostrar parcelas eliminadas
+
+        // Formatear fecha de último riego
+        const fechaRiego = new Date(parcela.ultimo_riego).toLocaleDateString()
+
         // Crear elemento HTML para el popup
         const popupContent = document.createElement("div")
         popupContent.className = "popup-content"
         popupContent.innerHTML = `
           <h3>${parcela.nombre}</h3>
-          <p>Temperatura: ${parcela.temperatura}°C</p>
-          <p>Humedad: ${parcela.humedad}%</p>
-          <p>Lluvia: ${parcela.lluvia ? "Sí" : "No"}</p>
+          <p><strong>Responsable:</strong> ${parcela.responsable}</p>
+          <p><strong>Último riego:</strong> ${fechaRiego}</p>
           <a href="/parcela/${parcela.id}" class="popup-link">Ver detalles</a>
         `
 
         // Crear marcador con popup
-        const marker = new mapboxgl.Marker({ color: "#2d3e34" })
-          .setLngLat([parcela.longitud, parcela.latitud])
+        const marker = new mapboxgl.Marker({ color: "#e53935" })
+          .setLngLat([Number.parseFloat(parcela.longitud), Number.parseFloat(parcela.latitud)])
           .setPopup(new mapboxgl.Popup().setDOMContent(popupContent))
           .addTo(newMap)
       })

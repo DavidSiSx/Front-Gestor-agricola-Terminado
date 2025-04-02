@@ -19,8 +19,10 @@ function ParcelasEliminadas() {
       try {
         setLoading(true)
         const data = await fetchParcelasEliminadas()
-        setParcelas(data)
-        setFilteredParcelas(data)
+        // Verificar que los datos son válidos
+        const validData = data.filter((parcela) => parcela && parcela.nombre)
+        setParcelas(validData)
+        setFilteredParcelas(validData)
       } catch (err) {
         console.error("Error al cargar parcelas eliminadas:", err)
         setError("Error al cargar los datos. Por favor, intenta de nuevo más tarde.")
@@ -34,8 +36,10 @@ function ParcelasEliminadas() {
 
   useEffect(() => {
     // Filtrar parcelas basado en búsqueda
-    if (searchTerm) {
-      const filtered = parcelas.filter((parcela) => parcela.nombre.toLowerCase().includes(searchTerm.toLowerCase()))
+    if (searchTerm && parcelas.length > 0) {
+      const filtered = parcelas.filter(
+        (parcela) => parcela.nombre && parcela.nombre.toLowerCase().includes(searchTerm.toLowerCase()),
+      )
       setFilteredParcelas(filtered)
     } else {
       setFilteredParcelas(parcelas)

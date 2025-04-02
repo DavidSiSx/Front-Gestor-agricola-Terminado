@@ -167,6 +167,8 @@ export const fetchParcelasEliminadas = async (): Promise<ParcelaEliminada[]> => 
           ultimaTemperatura: ultimoRegistro ? Number.parseFloat(ultimoRegistro.temperatura) : 0,
           ultimaHumedad: ultimoRegistro ? Number.parseFloat(ultimoRegistro.humedad) : 0,
           fechaEliminacion: parcela.ultimo_riego || new Date().toISOString(),
+          responsable: parcela.responsable,
+          ultimoRiego: parcela.ultimo_riego || new Date().toISOString(),
         }
       })
 

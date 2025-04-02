@@ -1,12 +1,12 @@
 :root {
-  --primary-color: #2d3e34; /* Verde oscuro */
-  --primary-dark: #1e2924; /* Verde más oscuro */
-  --primary-light: #3c4f43; /* Verde un poco más claro */
-  --secondary-color: #a17d5d; /* Marrón/café claro */
-  --background-color: #e8e1d5; /* Beige claro */
+  --primary-color: #4B5945; 
+  --primary-dark: #1e2924; 
+  --primary-light: #77c995; 
+  --secondary-color: #66785F; 
+  --background-color: #cedecb; 
   --text-color: #333;
   --text-light: #666;
-  --border-color: #ddd;
+  --border-color: #B2C9AD;
   --error-color: #e53935;
   --success-color: #43a047;
   --warning-color: #ffa000;

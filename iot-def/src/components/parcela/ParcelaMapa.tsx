@@ -33,19 +33,20 @@ function ParcelaMapa({ parcela }: ParcelaMapaProps) {
 
     // Agregar marcador cuando el mapa se cargue
     newMap.on("load", () => {
+      // Formatear fecha de último riego
+      const fechaRiego = new Date(parcela.ultimo_riego).toLocaleDateString()
+
       // Crear elemento HTML para el popup
       const popupContent = document.createElement("div")
       popupContent.className = "popup-content"
       popupContent.innerHTML = `
         <h3>${parcela.nombre}</h3>
-        <p>Ubicación: ${parcela.ubicacion}</p>
-        <p>Responsable: ${parcela.responsable}</p>
-        <p>Cultivo: ${parcela.tipo_cultivo}</p>
-        <p>Último riego: ${new Date(parcela.ultimo_riego).toLocaleString()}</p>
+        <p><strong>Responsable:</strong> ${parcela.responsable}</p>
+        <p><strong>Último riego:</strong> ${fechaRiego}</p>
       `
 
       // Crear marcador con popup
-      const marker = new mapboxgl.Marker({ color: "#2d3e34" })
+      const marker = new mapboxgl.Marker({ color: "#e53935" })
         .setLngLat([Number.parseFloat(parcela.longitud), Number.parseFloat(parcela.latitud)])
         .setPopup(new mapboxgl.Popup().setDOMContent(popupContent))
         .addTo(newMap)

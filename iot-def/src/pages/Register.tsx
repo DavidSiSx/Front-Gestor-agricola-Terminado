@@ -15,6 +15,33 @@ function Register() {
   const { register } = useAuth()
   const navigate = useNavigate()
 
+  // Validación de contraseña
+  const validatePassword = (password: string) => {
+    const errors = []
+
+    if (password.length < 8) {
+      errors.push("La contraseña debe tener al menos 8 caracteres")
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      errors.push("La contraseña debe contener al menos una letra mayúscula")
+    }
+
+    if (!/[a-z]/.test(password)) {
+      errors.push("La contraseña debe contener al menos una letra minúscula")
+    }
+
+    if (!/[0-9]/.test(password)) {
+      errors.push("La contraseña debe contener al menos un número")
+    }
+
+    if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) {
+      errors.push("La contraseña debe contener al menos un símbolo especial")
+    }
+
+    return errors
+  }
+
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     setError("")
@@ -35,8 +62,10 @@ function Register() {
       return
     }
 
-    if (password.length < 6) {
-      setError("La contraseña debe tener al menos 6 caracteres")
+    // Validar complejidad de contraseña
+    const passwordErrors = validatePassword(password)
+    if (passwordErrors.length > 0) {
+      setError(passwordErrors.join(". "))
       return
     }
 
@@ -104,8 +133,20 @@ function Register() {
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Contraseña (mínimo 6 caracteres)"
+              placeholder="Contraseña segura"
             />
+            <div className="password-requirements">
+              <p>La contraseña debe contener:</p>
+              <ul>
+                <li className={password.length >= 8 ? "requirement-met" : ""}>Al menos 8 caracteres</li>
+                <li className={/[A-Z]/.test(password) ? "requirement-met" : ""}>Al menos una letra mayúscula</li>
+                <li className={/[a-z]/.test(password) ? "requirement-met" : ""}>Al menos una letra minúscula</li>
+                <li className={/[0-9]/.test(password) ? "requirement-met" : ""}>Al menos un número</li>
+                <li className={/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password) ? "requirement-met" : ""}>
+                  Al menos un símbolo especial
+                </li>
+              </ul>
+            </div>
           </div>
 
           <div className="form-group">

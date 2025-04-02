@@ -41,37 +41,6 @@
   gap: 1.5rem;
 }
 
-.parcela-card {
-  background-color: white;
-  border-radius: var(--border-radius);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-  border-left: 3px solid var(--secondary-color);
-}
-
-.parcela-header {
-  margin-bottom: 1rem;
-}
-
-.parcela-header h3 {
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
-}
-
-.fecha-eliminacion {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--text-light);
-}
-
-.parcela-info {
-  margin-bottom: 1.5rem;
-}
-
-.parcela-info p {
-  margin-bottom: 0.5rem;
-}
-
 @media (max-width: 768px) {
   .parcelas-grid {
     grid-template-columns: 1fr;
