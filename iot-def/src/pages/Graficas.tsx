@@ -141,7 +141,13 @@ function Graficas() {
   const groupedByTime = groupDataByTimeInterval(filteredHistorial, timeInterval)
 
   // Ordenar las claves por timestamp
-  const timeKeys = Object.keys(groupedByTime).sort((a, b) => groupedByTime[a].timestamp - groupedByTime[b].timestamp)
+  let timeKeys = Object.keys(groupedByTime).sort((a, b) => groupedByTime[a].timestamp - groupedByTime[b].timestamp)
+
+  // Limitar a 10 registros si hay más de 10
+  if (timeKeys.length > 10) {
+    // Tomar los 10 primeros registros
+    timeKeys = timeKeys.slice(0, 10)
+  }
 
   // Preparar datos para las gráficas
   const labels = timeKeys.map((key) => formatDateTime(key))
@@ -397,7 +403,7 @@ function Graficas() {
         <div className="filtro-intervalo">
           <label htmlFor="intervalo-select">Intervalo:</label>
           <select id="intervalo-select" value={timeInterval} onChange={(e) => setTimeInterval(Number(e.target.value))}>
-          <option value="5">5 minutos</option>
+            <option value="5">5 minutos</option>
             <option value="15">15 minutos</option>
             <option value="30">30 minutos</option>
             <option value="60">1 hora</option>
@@ -408,6 +414,12 @@ function Graficas() {
           </select>
         </div>
       </div>
+
+      {timeKeys.length < Object.keys(groupedByTime).length && (
+        <div className="data-limit-notice">
+          Mostrando solo los 10 primeros registros de {Object.keys(groupedByTime).length} disponibles.
+        </div>
+      )}
 
       {filteredHistorial.length > 0 ? (
         <>
